@@ -151,6 +151,127 @@
             100% { transform: rotate(360deg); }
         }
 
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: #d4a5ff;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #d4a5ff;
+            border: none;
+            color: #2c2c54;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+            transition: background-color 0.3s;
+        }
+
+        .floating-button:hover {
+            background-color: #c491ff;
+        }
+
+        .modal {
+            display: none; /* Inicialmente escondido */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 4;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #2c2c54;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            color: #dcdcdc;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: #dcdcdc;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .developer-photo {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+
+        .developer-button {
+            background-color: #d4a5ff;
+            border: none;
+            color: #2c2c54;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .developer-button:hover {
+            background-color: #c491ff;
+        }
+
+        .coffee-button {
+            background-color: #d4a5ff;
+            border: none;
+            color: #2c2c54;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Adiciona um espaço acima do botão */
+        }
+
+        .coffee-button:hover {
+            background-color: #c491ff;
+        }
+
         /* Responsivo */
         @media (max-width: 768px) {
             .person-container {
@@ -168,6 +289,7 @@
             <div class="waves"></div>
             <div class="person"></div>
         </div>
+        <div class="scroll-down" onclick="scrollToContent()">&#x25BC;</div>
     </div>
     <div class="content">
         <div class="waves-content"></div>
@@ -188,9 +310,25 @@
         Exemplos em vídeos e textos.</p>
         <div class="button-container">
             <button class="button" onclick="redirectWithLoading()">Conhecer nosso Canal</button>
+            
         </div>
         <div class="loader" id="loader">•••</div>
     </div>
+    
+    <button class="floating-button" onclick="openModal()">👤</button>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">×</button>
+            <div class="developer-photo" style="background-image: url('https://i.ibb.co/pJPH8GX/IMG-20240723-081156-210.jpg');"></div>
+            <h2>@VEM_BRABO</h2>
+            <p>Apenas um entusiasta</p>
+            <p>Dev aprendiz, com algumas habilidades e conhecimento.</p>
+            <button class="developer-button" onclick="redirectDeveloper()">Saiba Mais</button>
+            <button class="coffee-button" onclick="redirectCoffee()">Nos Ajude com um gole de ☕</button>
+        </div>
+    </div>
+
     <script>
         window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
@@ -201,12 +339,32 @@
             personContainer.style.bottom = 10 + scrollPosition * 0.1 + '%';
         });
 
+        function scrollToContent() {
+            document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+        }
+
         function redirectWithLoading() {
             const loader = document.getElementById('loader');
             loader.style.display = 'block';
             setTimeout(() => {
                 window.location.href = 'https://t.me/allsourcesbr_canal'; // Substitua pelo URL desejado
             }, 3000); // Simula um loading de 3 segundos
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function redirectDeveloper() {
+            window.location.href = 'https://t.me/+qYBIdauvFc1jNThh'; // Substitua pelo URL desejado
+        }
+
+        function redirectCoffee() {
+            window.location.href = 'https://livepix.gg/vembrabo'; // URL para o botão "Nos Ajude com Café ☕"
         }
     </script>
 </body>
